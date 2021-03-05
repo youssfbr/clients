@@ -1,4 +1,4 @@
-package com.github.youssfbr.clientes.model.entity;
+package com.github.youssfbr.clientes.model.entities;
 
 import lombok.Data;
 
