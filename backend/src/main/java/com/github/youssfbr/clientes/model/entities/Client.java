@@ -1,5 +1,6 @@
 package com.github.youssfbr.clientes.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,5 +21,11 @@ public class Client {
     private String cpf;
 
     @Column(name = "date_register")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateRegister;
+
+    @PrePersist
+    public void prePersist() {
+        setDateRegister(LocalDate.now());
+    }
 }
