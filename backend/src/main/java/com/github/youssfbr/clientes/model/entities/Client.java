@@ -2,8 +2,10 @@ package com.github.youssfbr.clientes.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Entity
@@ -15,9 +17,12 @@ public class Client {
     private Long id;
 
     @Column(nullable = false, length = 150)
+    @NotEmpty(message = "{field.name.required}")
     private String name;
 
     @Column(nullable = false, length = 11)
+    @NotEmpty(message = "{field.cpf.required}")
+    @CPF(message = "{field.cpf.invalid}")
     private String cpf;
 
     @Column(name = "date_register", updatable = false)

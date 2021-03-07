@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<Client> insert (@RequestBody Client client) {
+    public ResponseEntity<Client> insert (@RequestBody @Valid Client client) {
         client = service.insert(client);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -42,7 +43,7 @@ public class ClientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody Client client) {
+    public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody @Valid Client client) {
         client = service.update(id, client);
 
         return ResponseEntity.ok(client);
