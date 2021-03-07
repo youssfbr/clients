@@ -34,7 +34,7 @@ public class ClientService {
     public Client findById(Long id) {
         return repository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Id " + id + " not found!"));
     }
 
     @Transactional
@@ -51,7 +51,7 @@ public class ClientService {
             return repository.save(entity);
         }
         catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Id " + id + " not found!");
         }
     }
 
@@ -60,7 +60,7 @@ public class ClientService {
             repository.deleteById(id);
         }
         catch (EmptyResultDataAccessException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Id " + id + " not found!");
         }
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException("Integrity Violation!");
